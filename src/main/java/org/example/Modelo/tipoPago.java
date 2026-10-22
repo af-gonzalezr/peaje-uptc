@@ -1,4 +1,4 @@
-package Modelo;
+package org.example.Modelo;
 
 public enum tipoPago {
 
