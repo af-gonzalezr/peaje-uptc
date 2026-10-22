@@ -19,6 +19,36 @@ public class Orden {
         this.idCaseta = idCaseta;
         this.fechaHora = fechaHora;
     }
+
+    @Override
+    public String toString() {
+        return "Orden [idOrden=" + idOrden + ", monto=" + monto + ", tipoPago=" + tipoPago + ", tipoVehiculo="
+                + tipoVehiculo + ", idCaseta=" + idCaseta + ", fechaHora=" + fechaHora + "]";
+    }
+    
+    public LocalDateTime getFechaHora() {
+        return fechaHora;
+    }
+
+    public String getIdOrden() {
+        return idOrden;
+    }
+
+    public double getMonto() {
+        return monto;
+    }
+
+    public tipoPago getTipoPago() {
+        return tipoPago;
+    }
+
+    public tipoVehiculo getTipoVehiculo() {
+        return tipoVehiculo;
+    }
+
+    public String getIdCaseta() {
+        return idCaseta;
+    }
     
     
     
