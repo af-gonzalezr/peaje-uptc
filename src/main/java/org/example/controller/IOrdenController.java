@@ -8,7 +8,6 @@ import java.util.List;
 public interface IOrdenController {
     Result<Orden> crearYRegistrarOrden(
             String idOrden,
-            String montoStr,
             String tipoPagoStr,
             String tipoVehiculoStr,
             String idCaseta,
