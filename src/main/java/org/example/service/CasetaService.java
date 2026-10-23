@@ -7,20 +7,17 @@ import org.example.exception.PeajeException;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class CasetaService implements ICasetaService {
 
-    // idCaseta -> Caseta
-    private final Map<String, Caseta> casetas = new LinkedHashMap<>();
+    // Lista de casetas registradas
+    private final List<Caseta> casetas = new ArrayList<>();
 
-    // idCaseta -> medios de pago que acepta esa caseta
-    private final Map<String, Set<TipoPago>> mediosPagoPorCaseta = new HashMap<>();
+    // Lista con los medios de pago de cada caseta (se relaciona por idCaseta)
+    private final List<MediosPagoCaseta> mediosPago = new ArrayList<>();
 
     @Override
     public void registrarCaseta(Caseta caseta) {
@@ -30,27 +27,29 @@ public class CasetaService implements ICasetaService {
         validarTexto(caseta.getIdCaseta(), "El ID de la caseta no puede estar vacío.");
         validarTexto(caseta.getNombre(), "El nombre de la caseta no puede estar vacío.");
 
-        String idCaseta = caseta.getIdCaseta();
-        if (casetas.containsKey(idCaseta)) {
-            throw new PeajeException("Ya existe una caseta con ID '" + idCaseta + "'.");
+        for (Caseta c : casetas) {
+            if (c.getIdCaseta().equals(caseta.getIdCaseta())) {
+                throw new PeajeException("Ya existe una caseta con ID '" + caseta.getIdCaseta() + "'.");
+            }
         }
 
-        casetas.put(idCaseta, caseta);
-        mediosPagoPorCaseta.put(idCaseta, EnumSet.noneOf(TipoPago.class));
+        casetas.add(caseta);
+        mediosPago.add(new MediosPagoCaseta(caseta.getIdCaseta()));
     }
 
     @Override
     public Caseta buscarPorId(String idCaseta) {
-        Caseta caseta = casetas.get(idCaseta);
-        if (caseta == null) {
-            throw new CasetaNoEncontradaException(idCaseta);
+        for (Caseta c : casetas) {
+            if (c.getIdCaseta().equals(idCaseta)) {
+                return c;
+            }
         }
-        return caseta;
+        throw new CasetaNoEncontradaException(idCaseta);
     }
 
     @Override
     public List<Caseta> listarTodas() {
-        return new ArrayList<>(casetas.values());
+        return new ArrayList<>(casetas);
     }
 
     @Override
@@ -59,18 +58,43 @@ public class CasetaService implements ICasetaService {
             throw new PeajeException("El medio de pago no puede ser nulo.");
         }
         buscarPorId(idCaseta); // lanza CasetaNoEncontradaException si no existe
-        mediosPagoPorCaseta.get(idCaseta).add(medioPago);
+
+        List<TipoPago> medios = buscarMedios(idCaseta).medios;
+        if (!medios.contains(medioPago)) {
+            medios.add(medioPago);
+        }
     }
 
     @Override
     public Set<TipoPago> obtenerMediosPagoSoportados(String idCaseta) {
         buscarPorId(idCaseta); // lanza CasetaNoEncontradaException si no existe
-        return Collections.unmodifiableSet(mediosPagoPorCaseta.get(idCaseta));
+
+        List<TipoPago> medios = buscarMedios(idCaseta).medios;
+        return Collections.unmodifiableSet(new LinkedHashSet<>(medios));
+    }
+
+    private MediosPagoCaseta buscarMedios(String idCaseta) {
+        for (MediosPagoCaseta m : mediosPago) {
+            if (m.idCaseta.equals(idCaseta)) {
+                return m;
+            }
+        }
+        throw new CasetaNoEncontradaException(idCaseta);
     }
 
     private void validarTexto(String valor, String mensaje) {
         if (valor == null || valor.isBlank()) {
             throw new PeajeException(mensaje);
+        }
+    }
+
+    // Guarda los medios de pago de una caseta usando una lista
+    private static class MediosPagoCaseta {
+        private final String idCaseta;
+        private final List<TipoPago> medios = new ArrayList<>();
+
+        private MediosPagoCaseta(String idCaseta) {
+            this.idCaseta = idCaseta;
         }
     }
 }
