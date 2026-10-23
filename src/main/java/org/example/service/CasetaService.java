@@ -20,31 +20,39 @@ public class CasetaService implements ICasetaService {
     private final List<MediosPagoCaseta> mediosPago = new ArrayList<>();
 
     @Override
-    public void registrarCaseta(Caseta caseta) {
-        if (caseta == null) {
-            throw new PeajeException("La caseta no puede ser nula.");
-        }
-        validarTexto(caseta.getIdCaseta(), "El ID de la caseta no puede estar vacío.");
-        validarTexto(caseta.getNombre(), "El nombre de la caseta no puede estar vacío.");
+    public Caseta registrarCaseta(String idCaseta, String nombre) {
+        validarTexto(idCaseta, "El ID de la caseta no puede estar vacío.");
+        validarTexto(nombre, "El nombre de la caseta no puede estar vacío.");
+
+        String idLimpio = idCaseta.trim();
+        String nombreLimpio = nombre.trim();
 
         for (Caseta c : casetas) {
-            if (c.getIdCaseta().equals(caseta.getIdCaseta())) {
-                throw new PeajeException("Ya existe una caseta con ID '" + caseta.getIdCaseta() + "'.");
+            if (c.getIdCaseta().equalsIgnoreCase(idLimpio)) {
+                throw new PeajeException("Ya existe una caseta con ID '" + idLimpio + "'.");
             }
         }
 
-        casetas.add(caseta);
-        mediosPago.add(new MediosPagoCaseta(caseta.getIdCaseta()));
+        Caseta nuevaCaseta = new Caseta(idLimpio, nombreLimpio);
+        casetas.add(nuevaCaseta);
+        mediosPago.add(new MediosPagoCaseta(idLimpio));
+
+        return nuevaCaseta;
     }
 
     @Override
     public Caseta buscarPorId(String idCaseta) {
+        if (idCaseta == null || idCaseta.isBlank()) {
+            throw new PeajeException("El ID de la caseta no puede estar vacío.");
+        }
+
+        String idLimpio = idCaseta.trim();
         for (Caseta c : casetas) {
-            if (c.getIdCaseta().equals(idCaseta)) {
+            if (c.getIdCaseta().equalsIgnoreCase(idLimpio)) {
                 return c;
             }
         }
-        throw new CasetaNoEncontradaException(idCaseta);
+        throw new CasetaNoEncontradaException(idLimpio);
     }
 
     @Override
@@ -57,9 +65,10 @@ public class CasetaService implements ICasetaService {
         if (medioPago == null) {
             throw new PeajeException("El medio de pago no puede ser nulo.");
         }
-        buscarPorId(idCaseta); // lanza CasetaNoEncontradaException si no existe
 
-        List<TipoPago> medios = buscarMedios(idCaseta).medios;
+        Caseta caseta = buscarPorId(idCaseta); // Lanza CasetaNoEncontradaException si no existe
+
+        List<TipoPago> medios = buscarMedios(caseta.getIdCaseta()).medios;
         if (!medios.contains(medioPago)) {
             medios.add(medioPago);
         }
@@ -67,15 +76,15 @@ public class CasetaService implements ICasetaService {
 
     @Override
     public Set<TipoPago> obtenerMediosPagoSoportados(String idCaseta) {
-        buscarPorId(idCaseta); // lanza CasetaNoEncontradaException si no existe
+        Caseta caseta = buscarPorId(idCaseta); // Lanza CasetaNoEncontradaException si no existe
 
-        List<TipoPago> medios = buscarMedios(idCaseta).medios;
+        List<TipoPago> medios = buscarMedios(caseta.getIdCaseta()).medios;
         return Collections.unmodifiableSet(new LinkedHashSet<>(medios));
     }
 
     private MediosPagoCaseta buscarMedios(String idCaseta) {
         for (MediosPagoCaseta m : mediosPago) {
-            if (m.idCaseta.equals(idCaseta)) {
+            if (m.idCaseta.equalsIgnoreCase(idCaseta)) {
                 return m;
             }
         }
