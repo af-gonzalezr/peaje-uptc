@@ -32,7 +32,7 @@ public class Caseta {
     }
 
     public List <Orden> getFechasOrdenes(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
-        
+
        return ordenes.stream()
                 .filter(orden -> orden.getFechaHora().isAfter(fechaInicio) && orden.getFechaHora().isBefore(fechaFin))
                 .toList();
