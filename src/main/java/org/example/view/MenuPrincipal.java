@@ -56,17 +56,13 @@ public class MenuPrincipal {
             case 4 -> {
                 System.out.print("ID Orden: ");
                 String idOrden = scanner.nextLine();
-                System.out.print("Monto: ");
-                String monto = scanner.nextLine();
                 System.out.print("Tipo Pago (EFECTIVO / COLPASS): ");
                 String pago = scanner.nextLine();
                 System.out.print("Tipo Vehículo (PESADO / LIGERO / MOTO): ");
                 String vehiculo = scanner.nextLine();
                 System.out.print("ID Caseta: ");
                 String idCaseta = scanner.nextLine();
-                System.out.print("Fecha y Hora (yyyy-MM-ddTHH:mm:ss): ");
-                String fechaHora = scanner.nextLine();
-                vistaOrden.registrarOrden(idOrden, monto, pago, vehiculo, idCaseta, fechaHora);
+                vistaOrden.registrarOrden(idOrden, pago, vehiculo, idCaseta);
             }
             case 5 -> {
                 System.out.print("ID Orden: ");
