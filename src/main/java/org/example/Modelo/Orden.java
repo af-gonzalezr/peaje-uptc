@@ -3,12 +3,12 @@ package org.example.Modelo;
 import java.time.LocalDateTime;
 
 public class Orden {
-    private String idOrden;
-    private double monto;
-    private tipoPago tipoPago;
-    private tipoVehiculo tipoVehiculo;
-    private String idCaseta;
-    private LocalDateTime fechaHora;
+    private final String idOrden;
+    private final double monto;
+    private final tipoPago tipoPago;
+    private final tipoVehiculo tipoVehiculo;
+    private final String idCaseta;
+    private final LocalDateTime fechaHora;
 
     public Orden(String idOrden, double monto, org.example.Modelo.tipoPago tipoPago, org.example.Modelo.tipoVehiculo tipoVehiculo,
             String idCaseta, LocalDateTime fechaHora) {

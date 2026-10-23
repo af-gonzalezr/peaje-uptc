@@ -1,6 +1,6 @@
 package org.example.service;
 
-public record Result<E>(boolean status,String message,E element){
+public record Result<T>(boolean status,String message,T element){
 
     public static <T> Result<T> success(String message,T element){
         return new Result<T>(true,message,element);
