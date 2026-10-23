@@ -8,7 +8,7 @@ import org.example.exception.OrdenNoEncontradaException;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface IOrdenService {
+    public interface IOrdenService {
     void registrarOrden(Orden orden);
     Orden buscarPorId(String idOrden);
     List<Orden> consultarPorFechaYCaseta(String idCaseta, LocalDate fecha);
