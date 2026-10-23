@@ -5,13 +5,13 @@ import java.time.LocalDateTime;
 public class Orden {
     private final String idOrden;
     private final double monto;
-    private final tipoPago tipoPago;
-    private final tipoVehiculo tipoVehiculo;
+    private final TipoPago tipoPago;
+    private final TipoVehiculo tipoVehiculo;
     private final String idCaseta;
     private final LocalDateTime fechaHora;
 
-    public Orden(String idOrden, double monto, org.example.Modelo.tipoPago tipoPago, org.example.Modelo.tipoVehiculo tipoVehiculo,
-            String idCaseta, LocalDateTime fechaHora) {
+    public Orden(String idOrden, double monto, TipoPago tipoPago, TipoVehiculo tipoVehiculo,
+                 String idCaseta, LocalDateTime fechaHora) {
         this.idOrden = idOrden;
         this.monto = monto;
         this.tipoPago = tipoPago;
@@ -22,7 +22,7 @@ public class Orden {
 
     @Override
     public String toString() {
-        return "Orden [idOrden=" + idOrden + ", monto=" + monto + ", tipoPago=" + tipoPago + ", tipoVehiculo="
+        return "Orden [idOrden=" + idOrden + ", monto=" + monto + ", TipoPago=" + tipoPago + ", TipoVehiculo="
                 + tipoVehiculo + ", idCaseta=" + idCaseta + ", fechaHora=" + fechaHora + "]";
     }
     
@@ -38,11 +38,11 @@ public class Orden {
         return monto;
     }
 
-    public tipoPago getTipoPago() {
+    public TipoPago getTipoPago() {
         return tipoPago;
     }
 
-    public tipoVehiculo getTipoVehiculo() {
+    public TipoVehiculo getTipoVehiculo() {
         return tipoVehiculo;
     }
 
