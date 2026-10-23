@@ -22,7 +22,7 @@ public class Orden {
 
     @Override
     public String toString() {
-        return "Orden [idOrden=" + idOrden + ", monto=" + monto + ", tipoPago=" + tipoPago + ", tipoVehiculo="
+        return "Orden [idOrden=" + idOrden + ", monto=" + monto + ", TipoPago=" + tipoPago + ", TipoVehiculo="
                 + tipoVehiculo + ", idCaseta=" + idCaseta + ", fechaHora=" + fechaHora + "]";
     }
     

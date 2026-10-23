@@ -8,11 +8,9 @@ import java.util.List;
 public interface IOrdenController {
     Result<Orden> crearYRegistrarOrden(
             String idOrden,
-            String montoStr,
             String tipoPagoStr,
             String tipoVehiculoStr,
-            String idCaseta,
-            String fechaHoraStr
+            String idCaseta
     );
     Result<Orden> buscarPorId(String idOrden);
     Result<List<Orden>> consultarPorFechaYCaseta(String idCaseta, String fechaStr);
