@@ -10,8 +10,7 @@ public interface IOrdenController {
             String idOrden,
             String tipoPagoStr,
             String tipoVehiculoStr,
-            String idCaseta,
-            String fechaHoraStr
+            String idCaseta
     );
     Result<Orden> buscarPorId(String idOrden);
     Result<List<Orden>> consultarPorFechaYCaseta(String idCaseta, String fechaStr);

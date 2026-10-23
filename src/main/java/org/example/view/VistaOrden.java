@@ -6,10 +6,6 @@ import org.example.service.Result;
 
 import java.util.List;
 
-//Implementación de la vista de órdenes para el Sistema de Gestión de Peajes.
-//Conecta la interacción del usuario (invocada desde MenuPrincipal) con el controlador
-//de órdenes (IOrdenController) y presenta los resultados por consola.
-
 public class VistaOrden implements IVistaOrden {
 
     private final IOrdenController controller;
@@ -24,19 +20,17 @@ public class VistaOrden implements IVistaOrden {
     @Override
     public void registrarOrden(
             String idOrden,
-            String montoStr,
             String tipoPagoStr,
             String tipoVehiculoStr,
-            String idCaseta,
-            String fechaHoraStr) {
+            String idCaseta) {
         System.out.println("\nRegistrando orden...");
+
+        // Se llama al controlador sin enviar montoStr ni fechaHoraStr
         Result<Orden> resultado = controller.crearYRegistrarOrden(
                 idOrden,
-                montoStr,
                 tipoPagoStr,
                 tipoVehiculoStr,
-                idCaseta,
-                fechaHoraStr);
+                idCaseta);
 
         ProcesadorResultado.procesar(resultado);
 
