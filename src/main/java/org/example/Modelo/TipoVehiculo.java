@@ -1,6 +1,6 @@
 package org.example.Modelo;
 
-public enum tipoVehiculo {
+public enum TipoVehiculo {
 
     PESADO, LIGERO, MOTO 
     
