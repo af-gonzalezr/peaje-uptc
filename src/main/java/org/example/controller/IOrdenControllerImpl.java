@@ -21,7 +21,7 @@ public class IOrdenControllerImpl implements IOrdenController {
 
 
     @Override
-    public Result<Orden> crearYRegistrarOrden(String idOrden, String tipoPagoStr, String tipoVehiculoStr, String idCaseta, String fechaHoraStr) {
+    public Result<Orden> crearYRegistrarOrden(String idOrden, String tipoPagoStr, String tipoVehiculoStr, String idCaseta) {
         if (idOrden == null || idOrden.isBlank()) {
             return Result.failed("El identificador no puede estar vacío.");
         }
@@ -46,12 +46,7 @@ public class IOrdenControllerImpl implements IOrdenController {
             return Result.failed("El tipo de pago no es valido.");
         }
 
-        LocalDateTime fechaHora;
-        try {
-            fechaHora = LocalDateTime.parse(fechaHoraStr);
-        }catch (NullPointerException | DateTimeParseException e) {
-            return Result.failed("La fecha y hora no es valido.");
-        }
+        LocalDateTime fechaHora = LocalDateTime.now();
 
         try {
             Orden nuevaOrden = ordenService.registrarOrden(
