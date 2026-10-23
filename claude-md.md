@@ -29,7 +29,7 @@ El proyecto sigue una estructura jerárquica de 4 capas para mantener un desacop
     - Abstraída tras interfaces DAO/Repository.
 
 5. **Capa de Modelo / Dominio (`org.example.modelo`)**:
-    - Clases POJO (`Caseta`, `Orden`, `tipoPago`, `tipoVehiculo`).
+    - Clases POJO (`Caseta`, `Orden`, `TipoPago`, `TipoVehiculo`).
 
 ---
 
@@ -124,13 +124,17 @@ Los servicios trabajan directamente con **tipos fuertemente tipados** (`enums`, 
 package org.example.service;
 
 import org.example.Modelo.Caseta;
+import org.example.Modelo.TipoPago;
 import org.example.Modelo.tipoPago;
+
 import java.util.List;
 
 public interface ICasetaService {
-    void registrarCaseta(Caseta caseta, List<tipoPago> pagosPermitidos);
-    Caseta buscarPorId(String idCaseta);
-    List<Caseta> listarTodas();
+   void registrarCaseta(Caseta caseta, List<TipoPago> pagosPermitidos);
+
+   Caseta buscarPorId(String idCaseta);
+
+   List<Caseta> listarTodas();
 }
 ```
 
@@ -154,16 +158,16 @@ public interface IOrdenService {
 ## 5. Ajustes Recomendados al Modelo Existente
 
 1. **Soporte de Tipos de Pago en `Caseta`**:
-   Actualmente la clase `Caseta` solo tiene lista de órdenes. Debe incluir la lista o conjunto de `tipoPago` que soporta:
+   Actualmente la clase `Caseta` solo tiene lista de órdenes. Debe incluir la lista o conjunto de `TipoPago` que soporta:
    ```java
    private List<tipoPago> tiposPagoSoportados;
    ```
 
 2. **Validación de Pago en Dominio/Servicio**:
-   Antes de agregar la orden a una caseta, la caseta (o el servicio) debe validar si el `tipoPago` de la orden está dentro de `tiposPagoSoportados`.
+   Antes de agregar la orden a una caseta, la caseta (o el servicio) debe validar si el `TipoPago` de la orden está dentro de `tiposPagoSoportados`.
 
 3. **Convenciones Naming Java**:
-   Renombrar los enums siguiendo la convención PascalCase: `tipoPago` -> `TipoPago` y `tipoVehiculo` -> `TipoVehiculo`.
+   Renombrar los enums siguiendo la convención PascalCase: `TipoPago` -> `TipoPago` y `TipoVehiculo` -> `TipoVehiculo`.
 
 ---
 
@@ -172,7 +176,7 @@ public interface IOrdenService {
 1. **Vista**: Pide al usuario datos por teclado como texto. Llama a `ordenController.crearYPagarOrden(...)`.
 2. **Controller**:
     - Parsea `monto` -> `double`.
-    - Parsea `tipoPago` -> `TipoPago.valueOf(...)`.
+    - Parsea `TipoPago` -> `TipoPago.valueOf(...)`.
     - Parsea `fechaHora` -> `LocalDateTime.parse(...)`.
     - Maneja `FormatoInvalidoException` si el parseo falla.
     - Construye la entidad `Orden` y la envía a `ordenService.registrarOrden(orden)`.

@@ -1,6 +1,6 @@
 package org.example.Modelo;
 
-public enum tipoPago {
+public enum TipoPago {
 
     EFECTIVO, COLPASS
     
