@@ -41,3 +41,4 @@ build/
 
 .claude/
 claude-md.md
+.mcp.json
