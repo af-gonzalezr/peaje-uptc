@@ -1,7 +1,7 @@
 package org.example.service;
 
 import org.example.Modelo.Caseta;
-import org.example.Modelo.tipoPago;
+import org.example.Modelo.TipoPago;
 import org.example.exception.CasetaNoEncontradaException;
 
 import java.util.List;
@@ -11,6 +11,6 @@ public interface ICasetaService {
     void registrarCaseta(Caseta caseta);
     Caseta buscarPorId(String idCaseta);
     List<Caseta> listarTodas();
-    void asociarMedioPago(String idCaseta, tipoPago medioPago);
-    Set<tipoPago> obtenerMediosPagoSoportados(String idCaseta);
+    void asociarMedioPago(String idCaseta, TipoPago medioPago);
+    Set<TipoPago> obtenerMediosPagoSoportados(String idCaseta);
 }
