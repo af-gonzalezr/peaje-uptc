@@ -1,17 +1,33 @@
 package org.example;
 
+import org.example.controller.ICasetaController;
+import org.example.controller.ICasetaControllerImpl;
+import org.example.controller.IOrdenController;
+import org.example.controller.IOrdenControllerImpl;
+import org.example.service.CasetaService;
+import org.example.service.ICasetaService;
+import org.example.service.IOrdenService;
+import org.example.service.OrdenServiceImpl;
+import org.example.view.*;
+
+import java.awt.*;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
-        }
+        ICasetaService casetaService = new CasetaService();
+        IOrdenService ordenService = new OrdenServiceImpl(casetaService);
+
+        ICasetaController casetaController = new ICasetaControllerImpl(casetaService);
+        IOrdenController ordenController = new IOrdenControllerImpl(ordenService);
+
+        IVistaCaseta vistaCaseta = new VistaCaseta(casetaController);
+        IVistaOrden vistaOrden = new VistaOrden(ordenController);
+
+        MenuPrincipal menu = new MenuPrincipal(vistaCaseta, vistaOrden);
+        menu.iniciar();
+
     }
 }
