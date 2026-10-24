@@ -1,6 +1,6 @@
 # Peaje - Sistema de Gestión de Peajes
 
-[![Java](https://img.shields.io/badge/Java-27%2B-blue.svg)](https://www.oracle.com/java/technologies/downloads/)
+[![Java](https://img.shields.io/badge/Java-25%2B-blue.svg)](https://www.oracle.com/java/technologies/downloads/)
 [![Maven](https://img.shields.io/badge/Maven-3.x-red.svg)](https://maven.apache.org/)
 
 Sistema de gestión para estaciones de peaje, desarrollado en Java utilizando una arquitectura **MVC (Modelo-Vista-Controlador)**. Este proyecto permite automatizar el registro de casetas y el procesamiento de órdenes de pago de peajes vehiculares.
