@@ -22,7 +22,7 @@ El sistema ofrece una interfaz interactiva de consola para realizar las siguient
 
 ## 🛠️ Requisitos Técnicos
 
-*   **Lenguaje**: Java 27 o superior.
+*   **Lenguaje**: Java 25 o superior.
 *   **Herramienta de Construcción**: Maven.
 
 ## 📁 Estructura del Proyecto
