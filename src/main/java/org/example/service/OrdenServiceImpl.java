@@ -56,11 +56,6 @@ public class OrdenServiceImpl implements IOrdenService {
     }
 
     @Override
-    public void registrarOrden(Orden orden) {
-
-    }
-
-    @Override
     public Orden buscarPorId(String idOrden) {
         return ordenes.stream()
                 .filter(o -> o.getIdOrden().equals(idOrden))

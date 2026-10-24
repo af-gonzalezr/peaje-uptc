@@ -16,7 +16,6 @@ public interface IOrdenService {
                          TipoVehiculo vehiculo,
                          String idCaseta,
                          LocalDateTime fechaHora);
-    void registrarOrden(Orden orden);
     Orden buscarPorId(String idOrden);
     List<Orden> consultarPorFechaYCaseta(String idCaseta, LocalDate fecha);
     List<Orden> consultarPorFechaGeneral(LocalDate fecha);

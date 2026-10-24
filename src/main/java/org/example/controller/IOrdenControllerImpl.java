@@ -32,7 +32,7 @@ public class IOrdenControllerImpl implements IOrdenController {
         TipoVehiculo tipoVehiculo;
 
         try {
-            tipoVehiculo = TipoVehiculo.valueOf(tipoVehiculoStr);
+            tipoVehiculo = TipoVehiculo.valueOf(tipoVehiculoStr.toUpperCase().trim());
         }catch (IllegalArgumentException e) {
             return Result.failed("El tipo de vehiculo no es valido.");
         }
@@ -41,7 +41,7 @@ public class IOrdenControllerImpl implements IOrdenController {
 
         TipoPago tipoPago;
         try {
-            tipoPago = TipoPago.valueOf(tipoPagoStr);
+            tipoPago = TipoPago.valueOf(tipoPagoStr.toUpperCase().trim());
         }catch (IllegalArgumentException e) {
             return Result.failed("El tipo de pago no es valido.");
         }
