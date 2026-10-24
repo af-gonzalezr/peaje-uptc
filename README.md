@@ -40,7 +40,7 @@ src/main/java/org/example/
 
 ## 🚀 Cómo Ejecutar
 
-1.  Asegúrate de tener instalado **Java 27+** y **Maven**.
+1.  Asegúrate de tener instalado **Java 25+** y **Maven**.
 2.  Clona el repositorio.
 3.  Navega a la carpeta del proyecto.
 4.  Ejecuta el proyecto utilizando Maven:
